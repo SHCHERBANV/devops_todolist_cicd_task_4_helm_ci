@@ -10,7 +10,8 @@ on:
 
 env:
   PythonVersion: 3.8
-  DockerImageName: todoapp
+  DockerImageName: shcherbanvasyl499/todoapp
+
 
 jobs:
   python-ci:
