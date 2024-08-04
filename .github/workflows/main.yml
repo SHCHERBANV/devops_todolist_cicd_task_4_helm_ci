@@ -26,6 +26,9 @@ jobs:
       run:
         working-directory: ./src
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Set up Python ${{ env.PythonVersion }}
         uses: actions/setup-python@v4
         with:
@@ -33,32 +36,37 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cd src
           python -m pip install --upgrade pip
           pip install coverage flake8
           pip install -r requirements.txt
 
       - name: Run tests
         run: |
+          cd src
           python manage.py test
 
       - name: Generate Report
         run: |
+          cd src
           coverage run --source='.' manage.py test
           coverage report
 
       - name: Linting
         run: |
+          cd src
           flake8 . --show-source --statistics --exit-zero
 
       - name: Check Complexity
         run: |
+          cd src
           flake8 . --exit-zero --max-complexity=6
 
       - name: Upload python artifacts
         uses: actions/upload-artifact@v4
         with:
           name: python-artifacts
-          path: .
+          path: src
 
       - name: Upload helm artifacts
         if: github.ref_name == 'main'
