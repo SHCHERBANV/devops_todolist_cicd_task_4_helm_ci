@@ -10,7 +10,7 @@ on:
 
 env:
   PythonVersion: 3.8
-  DockerImageName: your-dockerhub-repo/todoapp
+  DockerImageName: shcherbanvasyl499/todoapp
 
 jobs:
   setup:
